@@ -1,0 +1,7 @@
+dist-newstyle/
+.stack-work/
+*.hi
+*.o
+snapshots/
+*.csv
+report.txt

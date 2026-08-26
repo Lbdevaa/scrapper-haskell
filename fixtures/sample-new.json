@@ -1,0 +1,40 @@
+{
+  "products": [
+    {
+      "name": "Помидоры Фламенко сливовидные красные 1кг",
+      "url": "/product/tomaty-flamenko-slivovidnye-krasnye-1-kg--1204466",
+      "rating": 4.8,
+      "reviews": 3010,
+      "price": 299,
+      "oldPrice": 399,
+      "discount": 100
+    },
+    {
+      "name": "Помидоры черри Фламенко 250г упаковка",
+      "url": "/product/tomaty-cherri-flamenko-krasnye-kruglye--1293724",
+      "rating": "4.8",
+      "reviews": "150",
+      "price": 339,
+      "oldPrice": 0,
+      "discount": 0
+    },
+    {
+      "name": "Помидоры Черри медовые красные круглые 200г упаковка",
+      "url": "/product/luhovitskie-ovoschi-tomaty-cherri-na-vetke-med-250g--509967",
+      "rating": 4.8,
+      "reviews": 2050,
+      "price": 269,
+      "oldPrice": 312,
+      "discount": 43
+    },
+    {
+      "name": "Помидоры сливовидные на ветке 500г",
+      "url": "/product/tomaty-slivovidnye-na-vetke-500g--888123",
+      "rating": 4.2,
+      "reviews": 12,
+      "price": 259,
+      "oldPrice": 0,
+      "discount": 0
+    }
+  ]
+}
