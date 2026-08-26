@@ -6,13 +6,11 @@ module Vprok.Types
   , CategoryPayload(..)
   , productLink
   , basePrice
-  , salePrice
   , discountValue
   , inStock
   ) where
 
 import           Data.Aeson
-import           Data.Aeson.Key    (Key)
 import           Data.Aeson.Types  (Parser, typeMismatch)
 import           Data.Text         (Text)
 import qualified Data.Text         as T
@@ -80,8 +78,8 @@ optDouble o k = do
 optInt :: Object -> Key -> Parser (Maybe Int)
 optInt o k = fmap (round :: Double -> Int) <$> optDouble o k
 
--- | В API лежит относительный путь; в JS-версии он склеивался с хостом,
--- у которого уже был слэш на конце, и ссылка выходила с двойным слэшем.
+-- | В API лежит относительный путь, иногда с ведущим слэшем: срезаем его,
+-- чтобы в ссылке не получилось двойного слэша.
 productLink :: Product -> Text
 productLink p = "https://www.vprok.ru/" <> T.dropWhile (== '/') (prodUrl p)
 
@@ -92,15 +90,6 @@ basePrice p =
     (Just old, Just now) | old > 0 && old > now -> Just old
     (Just old, Nothing)  | old > 0              -> Just old
     _                                           -> Nothing
-
--- | Акционная цена: то, что платит покупатель, но только когда скидка есть.
--- В JS-версии сюда попадала обычная цена, из-за чего поля «Цена» и
--- «Акционная цена» всегда совпадали.
-salePrice :: Product -> Maybe Double
-salePrice p =
-  case basePrice p of
-    Just _  -> prodPrice p
-    Nothing -> Nothing
 
 -- | Размер скидки: берём из API, а если его там нет — считаем сами.
 discountValue :: Product -> Maybe Double

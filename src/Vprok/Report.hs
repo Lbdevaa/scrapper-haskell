@@ -47,7 +47,7 @@ sortProducts key = case key of
   SortRating   -> sortOn (Down . fromMaybe 0 . prodRating)
   SortReviews  -> sortOn (Down . fromMaybe 0 . prodReviews)
 
--- | Формат совместим с products-api.txt из JS-версии.
+-- | Плоский текстовый формат: один блок на товар, разделитель между блоками.
 renderReport :: [Product] -> Text
 renderReport = T.concat . map block
   where
@@ -57,7 +57,6 @@ renderReport = T.concat . map block
       , "Рейтинг: " <> maybe dash formatDouble (prodRating p)
       , "Количество отзывов: " <> maybe dash (T.pack . show) (prodReviews p)
       , "Цена: " <> maybe "Недоступен" formatDouble (prodPrice p)
-      , "Акционная цена: " <> maybe dash formatDouble (salePrice p)
       , "Цена до акции: " <> maybe dash formatDouble (basePrice p)
       , "Размер скидки: " <> maybe dash formatDouble (discountValue p)
       , "---------------"
@@ -75,12 +74,15 @@ renderStock products = T.unlines $
     (available, missing) = partition inStock products
     bullet p = "  - " <> prodName p <> "\n    " <> productLink p
 
+-- | Целые печатаем без дробной части, дробные — без хвостовых нулей,
+-- чтобы рейтинг выглядел как 4.8, а не 4.80.
 formatDouble :: Double -> Text
 formatDouble d
   | d == fromIntegral rounded = T.pack (show rounded)
-  | otherwise                 = T.pack (showFFloat (Just 2) d "")
+  | otherwise                 = trimZeros (T.pack (showFFloat (Just 2) d ""))
   where
     rounded = round d :: Integer
+    trimZeros = T.dropWhileEnd (== '.') . T.dropWhileEnd (== '0')
 
 dash :: Text
 dash = "—"

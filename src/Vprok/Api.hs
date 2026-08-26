@@ -1,7 +1,7 @@
 {-# LANGUAGE OverloadedStrings #-}
 
--- | Запрос к каталогу vprok.ru. Тот же вызов, что делал part2.js изнутри
--- страницы, только без браузера: куки берём с главной обычным GET-ом.
+-- | Запрос к каталогу vprok.ru. Тот же вызов, что делает страница каталога,
+-- только без браузера: куки берём с главной обычным GET-ом.
 module Vprok.Api
   ( CategoryRef(..)
   , FetchOptions(..)
@@ -12,7 +12,9 @@ module Vprok.Api
 
 import           Data.Aeson                 (Value, eitherDecode, encode,
                                              object, (.=))
-import           Data.Char                  (isDigit)
+import qualified Data.ByteString.Lazy       as BL
+import qualified Data.ByteString.Lazy.Char8 as BLC
+import           Data.Char                  (isDigit, isSpace)
 import           Data.Text                  (Text)
 import qualified Data.Text                  as T
 import qualified Data.Text.Encoding         as TE
@@ -75,19 +77,36 @@ fetchCategory opts ref = do
                               } manager
 
   apiReq <- parseRequest (T.unpack (endpoint opts ref))
-  let body = encode (object [ "noRedirect" .= True
-                            , "url"        .= catPath ref
-                            ])
+  let payload = encode (object [ "noRedirect" .= True
+                               , "url"        .= catPath ref
+                               ])
       req = apiReq { method          = "POST"
-                   , requestBody     = RequestBodyLBS body
+                   , requestBody     = RequestBodyLBS payload
                    , requestHeaders  = apiHeaders ref
                    , cookieJar       = Just (responseCookieJar homeResp)
                    }
   resp <- httpLbs req manager
   let status = statusCode (responseStatus resp)
-  pure $ if status >= 200 && status < 300
-    then eitherDecode (responseBody resp)
-    else Left ("API ответил кодом " ++ show status)
+      body   = responseBody resp
+  pure $ case () of
+    _ | status < 200 || status >= 300 -> Left ("API ответил кодом " ++ show status)
+      | looksLikeHtml body -> Left (htmlHint body)
+      | otherwise -> eitherDecode body
+
+-- | Вместо JSON сайт может отдать HTML-страницу: защита от ботов, капча или
+-- редирект на обычную вёрстку. Сообщаем об этом прямо, а не ошибкой разбора.
+looksLikeHtml :: BL.ByteString -> Bool
+looksLikeHtml body =
+  case BLC.uncons (BLC.dropWhile isSpace body) of
+    Just (c, _) -> c == '<'
+    Nothing     -> False
+
+htmlHint :: BL.ByteString -> String
+htmlHint body = concat
+  [ "вместо JSON пришла HTML-страница — похоже, запрос отклонён защитой сайта"
+  , "; начало ответа: "
+  , BLC.unpack (BL.take 120 body)
+  ]
 
 endpoint :: FetchOptions -> CategoryRef -> Text
 endpoint opts ref = T.concat

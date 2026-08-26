@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1513" height="140" viewBox="0 0 1513 140" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="14">
+<rect width="1513" height="140" rx="10" fill="#11111b"/>
+<path d="M0 10a10 10 0 0 1 10-10h1493a10 10 0 0 1 10 10v22H0z" fill="#1e1e2e"/>
+<circle cx="18" cy="16" r="6" fill="#f38ba8"/>
+<circle cx="36" cy="16" r="6" fill="#f9e2af"/>
+<circle cx="54" cy="16" r="6" fill="#a6e3a1"/>
+<text x="756.5" y="21" fill="#9399b2" font-size="12" text-anchor="middle">history.csv</text>
+<text x="16" y="44" fill="#a6e3a1">$</text><text x="24.42" y="44" fill="#cdd6f4" xml:space="preserve"> head -3 history.csv</text>
+<text x="16" y="64" fill="#cdd6f4" xml:space="preserve">fetched_at,category_id,name,url,price,old_price,discount,rating,reviews,in_stock</text>
+<text x="16" y="84" fill="#cdd6f4" xml:space="preserve">"2026-08-26T21:48:05Z","7382","Помидоры Фламенко сливовидные красные 1кг","https://www.vprok.ru/product/tomaty-flamenko-slivovidnye-krasnye-1-kg--1204466",349,399,50,4.8,2992,1</text>
+<text x="16" y="104" fill="#cdd6f4" xml:space="preserve">"2026-08-26T21:48:05Z","7382","Помидоры черри Фламенко 250г упаковка","https://www.vprok.ru/product/tomaty-cherri-flamenko-krasnye-kruglye--1293724",319,,,4.8,142,1</text>
+</svg>

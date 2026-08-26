@@ -8,7 +8,8 @@ import qualified Data.Text.IO        as TIO
 import           Data.Time           (getCurrentTime)
 import           Options.Applicative
 import           System.Exit         (die)
-import           System.IO           (hSetEncoding, stderr, stdout, utf8)
+import           System.IO           (BufferMode (LineBuffering), hSetBuffering,
+                                      hSetEncoding, stderr, stdout, utf8)
 
 import           Vprok.Api
 import           Vprok.Csv           (appendPriceHistory)
@@ -46,6 +47,7 @@ main :: IO ()
 main = do
   hSetEncoding stdout utf8
   hSetEncoding stderr utf8
+  hSetBuffering stdout LineBuffering
   cmd <- execParser cli
   case cmd of
     CmdFetch args      -> runFetch args

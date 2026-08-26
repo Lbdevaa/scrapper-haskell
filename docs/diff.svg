@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="764" height="440" viewBox="0 0 764 440" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="14">
+<rect width="764" height="440" rx="10" fill="#11111b"/>
+<path d="M0 10a10 10 0 0 1 10-10h744a10 10 0 0 1 10 10v22H0z" fill="#1e1e2e"/>
+<circle cx="18" cy="16" r="6" fill="#f38ba8"/>
+<circle cx="36" cy="16" r="6" fill="#f9e2af"/>
+<circle cx="54" cy="16" r="6" fill="#a6e3a1"/>
+<text x="382.0" y="21" fill="#9399b2" font-size="12" text-anchor="middle">scrapper diff</text>
+<text x="16" y="44" fill="#a6e3a1">$</text><text x="24.42" y="44" fill="#cdd6f4" xml:space="preserve"> scrapper diff snapshots/7382/20260826-101500.json snapshots/7382/20260827-101500.json</text>
+<text x="16" y="64" fill="#cdd6f4" xml:space="preserve">Подешевело:</text>
+<text x="16" y="84" fill="#cdd6f4" xml:space="preserve">  Помидоры Фламенко сливовидные красные 1кг: 349 -&gt; 299 (-50)</text>
+<text x="16" y="124" fill="#cdd6f4" xml:space="preserve">Подорожало:</text>
+<text x="16" y="144" fill="#cdd6f4" xml:space="preserve">  Помидоры черри Фламенко 250г упаковка: 319 -&gt; 339 (+20)</text>
+<text x="16" y="184" fill="#cdd6f4" xml:space="preserve">Появилось в наличии:</text>
+<text x="16" y="204" fill="#cdd6f4" xml:space="preserve">  Помидоры Черри медовые красные круглые 200г упаковка</text>
+<text x="16" y="244" fill="#cdd6f4" xml:space="preserve">Пропало из наличия: —</text>
+<text x="16" y="284" fill="#cdd6f4" xml:space="preserve">Новые товары:</text>
+<text x="16" y="304" fill="#cdd6f4" xml:space="preserve">  Помидоры сливовидные на ветке 500г</text>
+<text x="16" y="344" fill="#cdd6f4" xml:space="preserve">Исчезли из выдачи:</text>
+<text x="16" y="364" fill="#cdd6f4" xml:space="preserve">  Помидоры розовые отборные 1кг</text>
+<text x="16" y="404" fill="#cdd6f4" xml:space="preserve">Без изменений: 0</text>
+</svg>
